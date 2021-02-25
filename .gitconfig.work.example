@@ -1,0 +1,6 @@
+# Work-specific Git configuration
+# Copy this file to ~/.gitconfig.work and customize with your work email
+
+[user]
+	email = WORK_EMAIL@example.com
+	name = Your Name
