@@ -70,7 +70,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+	bundler
+	git
+	gh
+	rails
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,8 +113,57 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.dotfiles/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
+# base16 Shell
+# BASE16_SHELL="$HOME/.dotfiles/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+#     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#         eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# ruby
+# export PATH="/usr/local/opt/ruby/bin:$PATH"
+# export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/ruby/lib"
+# export CPPFLAGS="-I/usr/local/opt/ruby/include"
+
+# rbenv
+eval "$(rbenv init -)"
+
+# nodenv
+eval "$(nodenv init -)"
+
+# sqlite3
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# python
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+# alias python=python3
+# alias python-config=python-config3
+# alias pip=pip3
+
+# node
+# export PATH="/usr/local/opt/node@14/bin:$PATH"
+
+# curl
+export PATH="/usr/local/opt/curl/bin:$PATH"
+
+# Set CLICOLOR if you want Ansi Colors in iTerm2
+export CLICOLOR=1
+
+# Set colors to match iTerm2 Terminal Colors
+export TERM=xterm-256color
+
+# sbin
+export PATH="/usr/local/sbin:$PATH"
+
+# binding key
+bindkey "\xC2\xA0" " "
+
+# elastic stack
+export ES_HOME="/usr/local/opt/elasticsearch/elasticsearch-8.8.0"
+export KIBANA_HOME="/usr/local/opt/kibana/kibana-8.8.0"
+# export ES_PATH_CONF="/usr/local/etc/elasticsearch"
+# export KBN_PATH_CONF="/usr/local/etc/kibana"

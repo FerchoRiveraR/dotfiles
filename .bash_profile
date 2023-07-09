@@ -80,3 +80,20 @@ BASE16_SHELL="$HOME/.dotfiles/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+
+# sqlite3
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# Python
+alias python=python3
+alias python-config=python-config3
+alias pip=pip3
+
+# Node
+export PATH="/usr/local/opt/node@14/bin:$PATH"

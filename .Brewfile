@@ -1,26 +1,37 @@
 # Third-Party Repositories
 tap "homebrew/core"
 tap "homebrew/cask"
-# tap "homebrew/bundle"
 
 # packages
-brew "git"
-brew "vim"
-brew "tmux"
 brew "bash"
+brew "cloudflared"
 brew "curl"
-brew "python"
-brew "python3"
-brew "node"
+brew "flyctl"
 brew "gh"
+brew "git"
+brew "mas"
+brew "nodenv"
+brew "ocrmypdf"
+brew "pyenv"
+brew "rbenv"
+brew "rclone"
+brew "sqlite"
+brew "tmux"
+brew "vim"
 
-# macOS applications 
+# macOS applications
+cask "alacritty"
 cask "firefox"
-cask "macs-fan-control"
 cask "github"
+cask "google-chrome"
+cask "iterm2"
+cask "notion"
+cask "macs-fan-control"
+cask "visual-studio-code"
+cask "warp"
 
 # Mac App Store
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Keynote", id: 409183694
-mas "Namecheap VPN", id: 1419729466
+mas "The Unarchiver", id: 425424353
 mas "OneDrive", id: 823766827
+mas "FastVPN", id: 1419729466
