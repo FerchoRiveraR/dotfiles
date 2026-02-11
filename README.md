@@ -1,18 +1,17 @@
 # Fernando's dotfiles
 
-These are my system dotfiles for Linux Ubuntu.
+Personal dotfiles for Linux systems.
 
-## Quick Start
+## Setup
 
 ```bash
 git clone --recursive https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./install.sh
+
+ln -s ~/dotfiles/.bashrc ~/.bashrc
+ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/vimrc ~/.vim
+ln -s ~/dotfiles/vimrc/vimrc ~/.vimrc
 ```
 
-The `install.sh` script will automatically:
-- Initialize git submodules (vimrc)
-- Create symlinks for shell configurations and vim
-- Copy template files for local customization
-
-See [CLAUDE.md](CLAUDE.md) for detailed documentation, manual installation instructions, and dependency setup.
+See [CLAUDE.md](CLAUDE.md) for detailed documentation and dependency setup.
