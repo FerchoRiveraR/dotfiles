@@ -1,8 +1,6 @@
-# Local configuration files (may contain sensitive information)
-.gitconfig.local
-.gitconfig.work
 # Claude Code local settings
 .claude/settings.local.json
+CLAUDE.local.md
 
 # Editor and IDE files
 .vscode/
