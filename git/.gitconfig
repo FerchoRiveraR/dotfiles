@@ -10,7 +10,6 @@
 	helper =
 	helper = !/usr/bin/gh auth git-credential
 [core]
-	editor = vim
 	excludesFile = ~/.gitignore
 [merge]
 	tool = vimdiff

@@ -4,37 +4,56 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Personal dotfiles repository for Linux systems. Config files are ready to use — clone the repo and create symlinks to your home directory.
+Personal dotfiles repository for Linux systems (Arch + [omarchy](https://github.com/nicknisi/omarchy)), managed with [GNU Stow](https://www.gnu.org/software/stow/). Each config is organized as a stow package — install all or pick only what you need.
 
-### Key Files
+### Prerequisites
 
-- `.bashrc` — Bash shell config with bash-it framework (minimal theme)
-- `.tmux.conf` — Tmux config with vim keybindings and Wayland/X11 clipboard auto-detection
-- `.gitconfig` — Git configuration (credential helper: GitHub CLI, merge tool: vimdiff)
-- `.npmrc` — NPM config (disables color/spinner/progress)
-- `vimrc/` — Git submodule with complete Vim configuration (from github.com/FerchoRiveraR/vimrc)
+- **omarchy** — provides starship (prompt), eza (ls), mise (runtimes), fzf, zoxide, history, completions, aliases, and `$EDITOR=nvim`
+- **GNU Stow** — `sudo pacman -S stow`
+
+### Package Structure
+
+| Package | Contents | Installs |
+|---------|----------|----------|
+| `bash/` | `.config/bash/rc` — Entry point: sources shell, envs, aliases | `~/.config/bash/rc` |
+|         | `.config/bash/shell` — Shell options (checkwinsize) | `~/.config/bash/shell` |
+|         | `.config/bash/envs` — Personal environment variables | `~/.config/bash/envs` |
+|         | `.config/bash/aliases` — Personal aliases (grep --color) | `~/.config/bash/aliases` |
+| `git/` | `.gitconfig` — Git configuration (credential helper: GitHub CLI, merge tool: vimdiff) | `~/.gitconfig` |
+| `npm/` | `.npmrc` — NPM config (disables color/spinner/progress) | `~/.npmrc` |
+| `tmux/` | `.tmux.conf` — Tmux config with vim keybindings and Wayland/X11 clipboard auto-detection | `~/.tmux.conf` |
+| `vim/` | `.vim/` — Git submodule (from github.com/FerchoRiveraR/vimrc), `.vimrc` → `.vim/vimrc` | `~/.vim`, `~/.vimrc` |
 
 ### Setup
 
 ```bash
 git clone --recursive https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+stow -t ~ bash git npm tmux vim
+```
 
-ln -s ~/dotfiles/.bashrc ~/.bashrc
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/dotfiles/vimrc ~/.vim
-ln -s ~/dotfiles/vimrc/vimrc ~/.vimrc
+Then add this line to omarchy's `~/.bashrc` (where it says "Add your own"):
+```bash
+source ~/.config/bash/rc
+```
+
+To uninstall:
+```bash
+stow -t ~ -D bash git npm tmux vim
 ```
 
 ## Architecture
 
 ### Shell Initialization Order (`.bashrc`)
 
-1. Standard bash setup (history, colors, completion)
-2. bash-it framework (theme: minimal)
-3. NVM (Node.js)
-4. rbenv (Ruby)
-5. pyenv (Python)
+1. Interactive check (omarchy)
+2. Omarchy base config (`~/.local/share/omarchy/default/bash/rc`) — starship, eza, fzf, zoxide, mise, history, completions
+3. `$HOME/.local/bin` added to PATH (omarchy)
+4. Personal configs via `~/.config/bash/rc` → sources `{shell,envs,aliases}`
+
+### Runtime Managers
+
+Runtimes (Node.js, Ruby, Python) are managed by **mise** (installed via omarchy). No manual setup needed — `mise install` in a project directory picks up `.tool-versions` or `mise.toml`.
 
 ### Tmux Clipboard Integration
 
@@ -42,7 +61,7 @@ The `.tmux.conf` auto-detects the display server:
 - **Wayland** (`$WAYLAND_DISPLAY` set): uses `wl-copy`
 - **X11** (fallback): uses `xsel -i --clipboard`
 
-Requires: `sudo apt install wl-clipboard xsel`
+Requires: `sudo pacman -S wl-clipboard xsel`
 
 ### Conditional Git Identity
 
@@ -52,6 +71,8 @@ Requires: `sudo apt install wl-clipboard xsel`
     path = ~/.gitconfig.work
 ```
 Create `~/.gitconfig.work` manually and update `WORK_DIR` to your actual work directory path.
+
+Git uses `$EDITOR` (nvim, set by omarchy) — no explicit editor configured in `.gitconfig`.
 
 ## Common Commands
 
@@ -63,28 +84,23 @@ source ~/.bashrc
 # prefix + r
 
 # Update submodules
-git submodule update --remote          # update all
-git submodule update --remote vimrc    # update vimrc only
+git submodule update --remote            # update all
+git submodule update --remote vim/.vim   # update vim only
+
+# Install runtimes (via mise)
+mise install node@lts
+mise install ruby@latest
+mise install python@latest
 ```
 
 ### Dependencies
 
 ```bash
-# bash-it
-git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh
-
-# NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# rbenv
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-
-# pyenv
-curl https://pyenv.run | bash
+# stow
+sudo pacman -S stow
 
 # Clipboard tools (for tmux)
-sudo apt install wl-clipboard xsel
+sudo pacman -S wl-clipboard xsel
 ```
 
 ## Git Commit Guidelines

@@ -1,8 +1,6 @@
 # Local configuration files (may contain sensitive information)
 .gitconfig.local
 .gitconfig.work
-.npmrc
-
 # Claude Code local settings
 .claude/settings.local.json
 
