@@ -8,3 +8,6 @@ alias egrep='egrep --color=auto'
 alias oc='opencode'
 alias c='claude --dangerously-skip-permissions'
 alias cc='claude --allow-dangerously-skip-permissions'
+
+alias vi='nvim'
+alias vim='nvim'
