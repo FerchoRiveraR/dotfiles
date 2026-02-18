@@ -5,6 +5,4 @@ CLAUDE.local.md
 # Editor and IDE files
 .vscode/
 .idea/
-*.swp
-*.swo
 *~

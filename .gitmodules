@@ -1,3 +1,0 @@
-[submodule "vimrc"]
-	path = vim/.vim
-	url = https://github.com/FerchoRiveraR/vimrc

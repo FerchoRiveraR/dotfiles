@@ -22,14 +22,13 @@ Personal dotfiles repository for Linux systems (Arch + [omarchy](https://github.
 | `git/` | `.gitconfig` — Git configuration (default branch: main) | `~/.gitconfig` |
 | `npm/` | `.npmrc` — NPM config (disables color/spinner/progress) | `~/.npmrc` |
 | `tmux/` | `.tmux.conf` — Tmux config with vim keybindings and Wayland/X11 clipboard auto-detection | `~/.tmux.conf` |
-| `vim/` | `.vim/` — Git submodule (from github.com/FerchoRiveraR/vimrc), `.vimrc` → `.vim/vimrc` | `~/.vim`, `~/.vimrc` |
 
 ### Setup
 
 ```bash
-git clone --recursive https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
+git clone https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow -t ~ bash git npm tmux vim
+stow -t ~ bash git npm tmux
 ```
 
 Then add this line to omarchy's `~/.bashrc` (where it says "Add your own"):
@@ -39,7 +38,7 @@ source ~/.config/bash/rc
 
 To uninstall:
 ```bash
-stow -t ~ -D bash git npm tmux vim
+stow -t ~ -D bash git npm tmux
 ```
 
 ## Architecture
@@ -79,10 +78,6 @@ source ~/.bashrc
 
 # Reload tmux config (from inside tmux)
 # prefix + r
-
-# Update submodules
-git submodule update --remote            # update all
-git submodule update --remote vim/.vim   # update vim only
 
 # Install runtimes (via mise)
 mise install node@lts

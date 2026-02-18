@@ -10,7 +10,6 @@ Personal dotfiles for Linux systems, managed with [GNU Stow](https://www.gnu.org
 | `git` | Git configuration (GitHub CLI, vimdiff) |
 | `npm` | NPM config |
 | `tmux` | Tmux with vim keybindings and clipboard integration |
-| `vim` | Vim configuration (git submodule) |
 
 ## Setup
 
@@ -18,12 +17,12 @@ Personal dotfiles for Linux systems, managed with [GNU Stow](https://www.gnu.org
 # Install stow
 sudo pacman -S stow
 
-# Clone with submodules
-git clone --recursive https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
+# Clone
+git clone https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
 
 # Stow all packages
 cd ~/dotfiles
-stow -t ~ bash git npm tmux vim
+stow -t ~ bash git npm tmux
 
 # Or pick only what you need
 stow -t ~ bash git tmux
@@ -33,7 +32,7 @@ stow -t ~ bash git tmux
 
 ```bash
 cd ~/dotfiles
-stow -t ~ -D bash git npm tmux vim
+stow -t ~ -D bash git npm tmux
 ```
 
 See [CLAUDE.md](CLAUDE.md) for detailed documentation and dependency setup.
