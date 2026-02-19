@@ -8,7 +8,6 @@ Personal dotfiles for Linux systems (Arch + [omarchy](https://github.com/nicknis
 |---------|-------------|--------------|
 | `bash/` | `~/.config/bash/{rc,shell,envs,aliases}` | Shell options, personal env vars, and aliases — sourced as fragments on top of omarchy |
 | `git/` | `~/.gitconfig` | Sets `init.defaultBranch = main` (credentials, LFS, identity configured separately) |
-| `npm/` | `~/.npmrc` | Disables color, spinner, and progress bar for cleaner CI/scripting output |
 | `tmux/` | `~/.tmux.conf` | Vim-style keybindings, true color, mouse support, and Wayland/X11 clipboard auto-detection |
 
 ## Prerequisites
@@ -25,7 +24,7 @@ git clone https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
 
 # 2. Stow all packages (or pick only the ones you want)
 cd ~/dotfiles
-stow -t ~ bash git npm tmux
+stow -t ~ bash git tmux
 
 # 3. Add this line to ~/.bashrc (where omarchy says "Add your own")
 source ~/.config/bash/rc
@@ -122,14 +121,6 @@ git config --global user.email "you@example.com"
 # Editor uses $EDITOR (nvim, set by omarchy)
 ```
 
-### npm
-
-The `.npmrc` disables three settings for cleaner output:
-
-- `color=false` — no ANSI colors
-- `spin=false` — no spinner animation
-- `progress=false` — no progress bar
-
 ### Common commands
 
 ```bash
@@ -189,7 +180,7 @@ Example: `feat(tmux): add session management keybinding`
 cd ~/dotfiles
 
 # 1. Remove symlinks
-stow -t ~ -D bash git npm tmux
+stow -t ~ -D bash git tmux
 
 # 2. Remove the source line from ~/.bashrc
 #    Delete: source ~/.config/bash/rc

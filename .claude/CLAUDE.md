@@ -20,7 +20,6 @@ Personal dotfiles repository for Linux systems (Arch + [omarchy](https://github.
 |         | `.config/bash/envs` — Personal environment variables | `~/.config/bash/envs` |
 |         | `.config/bash/aliases` — Personal aliases (grep --color) | `~/.config/bash/aliases` |
 | `git/` | `.gitconfig` — Git configuration (default branch: main) | `~/.gitconfig` |
-| `npm/` | `.npmrc` — NPM config (disables color/spinner/progress) | `~/.npmrc` |
 | `tmux/` | `.tmux.conf` — Tmux config with vim keybindings and Wayland/X11 clipboard auto-detection | `~/.tmux.conf` |
 
 ### Setup
@@ -28,7 +27,7 @@ Personal dotfiles repository for Linux systems (Arch + [omarchy](https://github.
 ```bash
 git clone https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow -t ~ bash git npm tmux
+stow -t ~ bash git tmux
 ```
 
 Then add this line to omarchy's `~/.bashrc` (where it says "Add your own"):
@@ -38,7 +37,7 @@ source ~/.config/bash/rc
 
 To uninstall:
 ```bash
-stow -t ~ -D bash git npm tmux
+stow -t ~ -D bash git tmux
 ```
 
 ## Architecture
