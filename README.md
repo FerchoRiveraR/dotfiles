@@ -1,20 +1,21 @@
 # Fernando's dotfiles
 
-Personal dotfiles for Linux systems (Arch + [omarchy](https://github.com/nicknisi/omarchy)), managed with [GNU Stow](https://www.gnu.org/software/stow/). Each directory is a stow package — install all of them or pick only what you need.
+Personal dotfiles for Ubuntu Linux, managed with [GNU Stow](https://www.gnu.org/software/stow/). Each directory is a stow package — install all of them or pick only what you need.
 
 ## Packages
 
 | Package | Installs to | What it does |
 |---------|-------------|--------------|
-| `bash/` | `~/.config/bash/{rc,shell,envs,aliases}` | Shell options, personal env vars, and aliases — sourced as fragments on top of omarchy |
+| `bash/` | `~/.config/bash/{rc,shell,envs,aliases}` | Shell options, personal env vars, and aliases |
 | `git/` | `~/.gitconfig` | Sets `init.defaultBranch = main` (credentials, LFS, identity configured separately) |
-| `tmux/` | `~/.tmux.conf` | Vim-style keybindings, true color, mouse support, and Wayland/X11 clipboard auto-detection |
+| `tmux/` | `~/.tmux.conf` | Vim-style keybindings, true color, mouse support, Wayland/X11 clipboard auto-detection, and session persistence (resurrect/continuum via TPM) |
 
 ## Prerequisites
 
-- **[omarchy](https://github.com/nicknisi/omarchy)** — provides starship (prompt), eza (ls), mise (runtimes), fzf, zoxide, history, completions, aliases, and sets `$EDITOR=nvim`
-- **GNU Stow** — `sudo pacman -S stow`
-- **Clipboard tools** (for tmux copy-mode) — `sudo pacman -S wl-clipboard xsel`
+- **GNU Stow** — `sudo apt install stow`
+- **Clipboard tools** (for tmux copy-mode) — `sudo apt install wl-clipboard xsel`
+- **nvim** — the `vi`/`vim` aliases redirect to it; install separately if you want them to work
+- **[TPM](https://github.com/tmux-plugins/tpm)** (for tmux plugins) — `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`, then `prefix + I` inside tmux to install
 
 ## Installation
 
@@ -26,8 +27,8 @@ git clone https://github.com/FerchoRiveraR/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow -t ~ bash git tmux
 
-# 3. Add this line to ~/.bashrc (where omarchy says "Add your own")
-source ~/.config/bash/rc
+# 3. Source it from ~/.bashrc
+echo 'source ~/.config/bash/rc' >> ~/.bashrc
 
 # 4. Reload
 source ~/.bashrc
@@ -103,6 +104,15 @@ Enter copy mode with `prefix + [`, then:
 
 Clipboard is auto-detected: uses `wl-copy` on Wayland, `xsel` on X11.
 
+**Session persistence:**
+
+| Key | Action |
+|-----|--------|
+| `prefix + Ctrl-s` | Save all sessions/windows/panes (tmux-resurrect) |
+| `prefix + Ctrl-r` | Restore saved sessions |
+
+tmux-continuum autosaves every few minutes and restores automatically when the tmux server starts (`@continuum-restore on`).
+
 ### git
 
 The `.gitconfig` is intentionally minimal — it only sets `init.defaultBranch = main`. Everything else is configured by their respective tools:
@@ -118,7 +128,7 @@ git lfs install
 git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 
-# Editor uses $EDITOR (nvim, set by omarchy)
+# Editor uses $EDITOR
 ```
 
 ### Common commands
@@ -129,11 +139,6 @@ source ~/.bashrc
 
 # Reload tmux config (from inside tmux)
 # prefix + r
-
-# Install runtimes (via mise, provided by omarchy)
-mise install node@lts
-mise install ruby@latest
-mise install python@latest
 ```
 
 ## Development

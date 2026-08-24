@@ -4,12 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Personal dotfiles repository for Linux systems (Arch + [omarchy](https://github.com/nicknisi/omarchy)), managed with [GNU Stow](https://www.gnu.org/software/stow/). Each config is organized as a stow package — install all or pick only what you need.
+Personal dotfiles repository for Ubuntu Linux, managed with [GNU Stow](https://www.gnu.org/software/stow/). Each config is organized as a stow package — install all or pick only what you need.
 
 ### Prerequisites
 
-- **omarchy** — provides starship (prompt), eza (ls), mise (runtimes), fzf, zoxide, history, completions, aliases, and `$EDITOR=nvim`
-- **GNU Stow** — `sudo pacman -S stow`
+- **GNU Stow** — `sudo apt install stow`
 
 ### Package Structure
 
@@ -30,9 +29,9 @@ cd ~/dotfiles
 stow -t ~ bash git tmux
 ```
 
-Then add this line to omarchy's `~/.bashrc` (where it says "Add your own"):
+Then source it from `~/.bashrc`:
 ```bash
-source ~/.config/bash/rc
+echo 'source ~/.config/bash/rc' >> ~/.bashrc
 ```
 
 To uninstall:
@@ -44,14 +43,8 @@ stow -t ~ -D bash git tmux
 
 ### Shell Initialization Order (`.bashrc`)
 
-1. Interactive check (omarchy)
-2. Omarchy base config (`~/.local/share/omarchy/default/bash/rc`) — starship, eza, fzf, zoxide, mise, history, completions
-3. `$HOME/.local/bin` added to PATH (omarchy)
-4. Personal configs via `~/.config/bash/rc` → sources `{shell,envs,aliases}`
-
-### Runtime Managers
-
-Runtimes (Node.js, Ruby, Python) are managed by **mise** (installed via omarchy). No manual setup needed — `mise install` in a project directory picks up `.tool-versions` or `mise.toml`.
+1. Whatever the user's `~/.bashrc` already does
+2. Personal configs via `~/.config/bash/rc` → sources `{shell,envs,aliases}`
 
 ### Tmux Clipboard Integration
 
@@ -59,7 +52,7 @@ The `.tmux.conf` auto-detects the display server:
 - **Wayland** (`$WAYLAND_DISPLAY` set): uses `wl-copy`
 - **X11** (fallback): uses `xsel -i --clipboard`
 
-Requires: `sudo pacman -S wl-clipboard xsel`
+Requires: `sudo apt install wl-clipboard xsel`
 
 ### Git Configuration
 
@@ -67,7 +60,7 @@ Requires: `sudo pacman -S wl-clipboard xsel`
 - **Credentials**: `gh auth setup-git`
 - **LFS**: `git lfs install`
 - **User identity**: `git config --global user.name/email`
-- **Editor**: uses `$EDITOR` (nvim, set by omarchy)
+- **Editor**: uses `$EDITOR`
 
 ## Common Commands
 
@@ -77,21 +70,16 @@ source ~/.bashrc
 
 # Reload tmux config (from inside tmux)
 # prefix + r
-
-# Install runtimes (via mise)
-mise install node@lts
-mise install ruby@latest
-mise install python@latest
 ```
 
 ### Dependencies
 
 ```bash
 # stow
-sudo pacman -S stow
+sudo apt install stow
 
 # Clipboard tools (for tmux)
-sudo pacman -S wl-clipboard xsel
+sudo apt install wl-clipboard xsel
 ```
 
 ## Git Commit Guidelines
